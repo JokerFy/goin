@@ -80,8 +80,75 @@ auth ParseMemberToken 验证密钥
 v1.GET("/index", middleware.MemberAuth(config.Auth.Token), helloV1.Hello)
 ```
 
-#### 模型使用
+#### service 服务
+```
+service 作为我们的服务层
+
+我们在编写一个服务的时候，先添加服务接口
+
+service/hello.go
+
+// Service 服务
+type Service interface {
+	// Hello hello
+	Hello()
+}
+
+再我们编写一个逻辑
+
+service/impl/hello.go
+
+type HelloImpl struct{}
+
+func (u *HelloImpl) Hello() {
+	fmt.Println("hello world")
+	return
+
+
+注册服务
+
+service.go
+
+import (
+	"goin/service/hello"
+	helloImpl "goin/service/hello/impl"
+)
+
+var HelloService hello.Service = new(helloImpl.HelloImpl)
+
+```
+
+#### model 模型使用
 参考[GORM2.0](https://gorm.io/zh_CN/docs/index.html)
+
+#### router 路由
+```
+routers/router.go里注册路由
+
+如application路由
+
+//application接口
+application.Init(e, config)
+
+在application/router.go里
+
+func Hello(c *gin.Context) {
+	utils.OutJsonOk(c, "这里是应用层服务，你好!")
+}
+
+func Init(e *gin.Engine, config *conf.AppConf) {
+	hello := e.Group("/hello")
+	{
+		hello.GET("/", Hello)
+		v1 := hello.Group("/v1")
+
+		v1.GET("/index", middleware.MemberAuth(config.Auth.Token), helloV1.Hello)
+	}
+}
+
+API管理
+hello/v1/index.go
+```
 
 #### 启动服务 
 `go run main.go`

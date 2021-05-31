@@ -21,9 +21,9 @@ func init()  {
 
 func makeProducer() *producer.Producer{
 	cfg := producer.GetDefaultProducerConfig()
-	cfg.Endpoint = "cn-hangzhou.log.aliyuncs.com"
-	cfg.AccessKeyID = "LTAInAUi1WTgkUhb"
-	cfg.AccessKeySecret = "Ky9UEeT3Aia8Kw2IGjwCZ1YCjO7cWh"
+	cfg.Endpoint = ""
+	cfg.AccessKeyID = ""
+	cfg.AccessKeySecret = ""
 	return producer.InitProducer(cfg)
 }
 
