@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"goin/conf"
 	"goin/db"
+	"goin/logger"
 	"goin/middleware"
 	"goin/routers"
 	"log"
@@ -30,12 +31,15 @@ func main() {
 	// 取配置
 	config := conf.GetConf()
 
-	//初始化Mysql数据库
+	// 初始化Mysql数据库
 	err = db.MysqlDial(&config.Mysql)
 	defer db.EloquentDb.Close()
 	if err != nil {
 		log.Fatalln("dial mysql error", err)
 	}
+
+	// 初始化日志
+	logger.New(&config.AliLog)
 
 	// http服务器
 	gin.DisableConsoleColor()

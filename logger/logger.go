@@ -1,7 +1,8 @@
-package utils
+package logger
 
 import (
 	"github.com/aliyun/aliyun-log-go-sdk/producer"
+	"goin/conf"
 	"os"
 	"time"
 )
@@ -9,8 +10,8 @@ import (
 var hostname = "unknow"
 var logger *producer.Producer = nil
 
-func init()  {
-	logger := makeProducer()
+func New(config *conf.AliLogConf)  {
+	logger := makeProducer(config)
 	logger.Start()
 
 	name,err := os.Hostname()
@@ -19,11 +20,11 @@ func init()  {
 	}
 }
 
-func makeProducer() *producer.Producer{
+func makeProducer(config *conf.AliLogConf) *producer.Producer{
 	cfg := producer.GetDefaultProducerConfig()
-	cfg.Endpoint = ""
-	cfg.AccessKeyID = ""
-	cfg.AccessKeySecret = ""
+	cfg.Endpoint = config.Endpoint
+	cfg.AccessKeyID = config.AccessKeyID
+	cfg.AccessKeySecret = config.AccessKeySecret
 	return producer.InitProducer(cfg)
 }
 

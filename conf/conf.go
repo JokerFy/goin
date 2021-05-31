@@ -9,7 +9,7 @@ import (
 
 // MysqlConf mysql配置
 type MysqlConf struct {
-	DSN  string `yaml:"dsn"`
+	DSN string `yaml:"dsn"`
 }
 
 // RedisConf redis配置
@@ -45,6 +45,12 @@ type QiniuConf struct {
 	Domain    string `yaml:"domain"`
 }
 
+type AliLogConf struct {
+	Endpoint        string `yaml:"endpoint"`
+	AccessKeyID     string `yaml:"access_key_id"`
+	AccessKeySecret string `yaml:"access_key_secret"`
+}
+
 // AppConf app配置
 type AppConf struct {
 	Addr    string            `yaml:"addr"`
@@ -56,6 +62,7 @@ type AppConf struct {
 	Mongo   MongoConf         `yaml:"mongo"`
 	Gcache  GcacheConf        `yaml:"gcache"`
 	Qiniu   QiniuConf         `yaml:"qiniu"`
+	AliLog  AliLogConf        `yaml:"ali_log"`
 }
 
 var _conf *AppConf = nil
