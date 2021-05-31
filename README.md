@@ -1,12 +1,20 @@
-# 中台服务
+# GOIN
 
-### 下载依赖前设置代理（也可go get获取依赖包）
+### 简介
+这是基于Gin的一款web框架，采用mvc架构，方便快捷开发使用
+
+### 使用
+```
+go get github.com/DanPlayer/goin
+```
+
+### 文档
+
+#### 下载依赖前设置代理（也可go get获取依赖包）
 1. windows
    > set GOPROXY=https://goproxy.io
 2. centos/macos
    > export GOPROXY=https://goproxy.io
-
-### 文档
 
 #### 目录
 ```
